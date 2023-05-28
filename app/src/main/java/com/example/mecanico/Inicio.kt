@@ -1,5 +1,6 @@
 package com.example.mecanico
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -26,16 +27,15 @@ class Inicio : AppCompatActivity() {
             }else{
                 Toast.makeText(baseContext, "¡Por favor ingresa un email y/o contraseña válido!",Toast.LENGTH_SHORT).show()
             }
-
         }
     }
-
     private fun credenciales(email: String, clave: String){
         firebaseAuth.signInWithEmailAndPassword(email,clave).addOnCompleteListener(this) { task ->
             if(task.isSuccessful){
                 val user = firebaseAuth.currentUser
-                Toast.makeText(baseContext, user?.uid.toString(),Toast.LENGTH_SHORT).show()
                 //aquí se va al home activity
+                val intent= Intent(applicationContext, Home::class.java)
+                startActivity(intent)
             }else{
                 Toast.makeText(baseContext, "Error Email/Contraseña incorrectas",Toast.LENGTH_SHORT).show()
             }
