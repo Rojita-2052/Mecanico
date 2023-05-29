@@ -11,9 +11,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class Inicio : AppCompatActivity() {
+
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
         val btnIngresar : Button = findViewById(R.id.btn_ingresar)
@@ -34,7 +36,9 @@ class Inicio : AppCompatActivity() {
             if(task.isSuccessful){
                 val user = firebaseAuth.currentUser
                 //aquí se va al home activity
-                val intent= Intent(applicationContext, Home::class.java)
+                val intent= Intent(applicationContext, Home::class.java).apply {
+                    putExtra("email", email)
+                }
                 startActivity(intent)
             }else{
                 Toast.makeText(baseContext, "Error Email/Contraseña incorrectas",Toast.LENGTH_SHORT).show()
