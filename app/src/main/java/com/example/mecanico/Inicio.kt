@@ -19,6 +19,7 @@ class Inicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
         val btnIngresar : Button = findViewById(R.id.btn_ingresar)
+
         val email : TextView = findViewById(R.id.txt_email)
         val pass : TextView= findViewById<TextView>(R.id.txt_password)
         firebaseAuth = Firebase.auth

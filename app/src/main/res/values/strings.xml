@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Mecanico</string>
+    <string name="brand_prompt">Marca</string>
+    <string name="color_prompt">Color</string>
+
+
+
+
 </resources>

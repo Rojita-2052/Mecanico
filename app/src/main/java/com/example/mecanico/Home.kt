@@ -27,5 +27,8 @@ class Home : AppCompatActivity() {
              val intent= Intent(applicationContext, Inicio::class.java)
              startActivity(intent)
         }
+
+
+
     }
 }
