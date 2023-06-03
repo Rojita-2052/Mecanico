@@ -44,7 +44,7 @@
         android:layout_marginEnd="40dp"
         android:ems="10"
         android:hint="Clave"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,5 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_password" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
