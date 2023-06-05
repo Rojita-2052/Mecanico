@@ -58,6 +58,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
         android:fontFamily="sans-serif-black"
+        android:onClick="enviar"
         android:text="INGRESAR"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

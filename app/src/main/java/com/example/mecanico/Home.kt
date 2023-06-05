@@ -28,7 +28,5 @@ class Home : AppCompatActivity() {
              startActivity(intent)
         }
 
-
-
     }
 }
