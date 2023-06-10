@@ -40,6 +40,8 @@ class Inicio : AppCompatActivity() {
         }
     }
     private fun credenciales(email: String, clave: String){
+        val correo : EditText = findViewById(R.id.txt_email)
+        val pass : EditText= findViewById(R.id.txt_password)
         firebaseAuth.signInWithEmailAndPassword(email,clave).addOnCompleteListener(this) { task ->
             if(task.isSuccessful){
                 val user = firebaseAuth.currentUser
@@ -49,6 +51,8 @@ class Inicio : AppCompatActivity() {
                 }
                 startActivity(intent)
             }else{
+                correo.error = "Email incorrecto"
+                pass.error = "Contraseña incorrecta"
                 Toast.makeText(baseContext, "Error Email/Contraseña incorrectas",Toast.LENGTH_SHORT).show()
             }
         }
