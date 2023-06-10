@@ -5,7 +5,8 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro">
+    tools:context=".Registro"
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/tv_titulo"
