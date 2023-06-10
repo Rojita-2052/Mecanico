@@ -7,26 +7,37 @@ import android.widget.Button
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
+import androidx.appcompat.app.AlertDialog
 class Home : AppCompatActivity() {
     private lateinit var bdAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        val btnRegistro: Button= findViewById(R.id.btn_registrar)
-        val btnSalir: Button= findViewById(R.id.btn_salir)
+        val btnRegistro: Button = findViewById(R.id.btn_registrar)
+        val btnSalir: Button = findViewById(R.id.btn_salir)
         bdAuth = Firebase.auth
-         btnRegistro.setOnClickListener(){
-             val intent= Intent(applicationContext, Registro::class.java)
-             startActivity(intent)
-         }
-
-         btnSalir.setOnClickListener(){
-            bdAuth.signOut()
-             val intent= Intent(applicationContext, Inicio::class.java)
-             startActivity(intent)
+        btnRegistro.setOnClickListener() {
+            val intent = Intent(applicationContext, Registro::class.java)
+            startActivity(intent)
         }
-
+        btnSalir.setOnClickListener() {
+            mostrarDialogoSalir()
+        }
+    }
+    override fun onBackPressed() {
+        mostrarDialogoSalir()
+    }
+    private fun mostrarDialogoSalir() {
+        AlertDialog.Builder(this)
+            .setTitle("Salir")
+            .setMessage("¿Estás seguro que deseas salir de la sesion?")
+            .setPositiveButton("Sí") { dialog, which ->
+                bdAuth.signOut()
+                val intent = Intent(applicationContext, Inicio::class.java)
+                startActivity(intent)
+                finish()
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 }
