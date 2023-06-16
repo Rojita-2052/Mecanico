@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import androidx.appcompat.app.AlertDialog
+import android.os.Handler
 class Home : AppCompatActivity() {
     private lateinit var bdAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,5 +40,21 @@ class Home : AppCompatActivity() {
             }
             .setNegativeButton("No", null)
             .show()
+    }
+}
+class SplashActivity : AppCompatActivity() {
+
+    private val SPLASH_DELAY: Long = 2000 // 2 segundos
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_splash)
+
+        Handler().postDelayed({
+            val intent = Intent(this@SplashActivity, Inicio::class.java)
+            startActivity(intent)
+            finish()
+        }, SPLASH_DELAY)
     }
 }
