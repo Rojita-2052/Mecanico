@@ -15,10 +15,15 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val btnRegistro: Button = findViewById(R.id.btn_registrar)
+        val btnHistorial: Button = findViewById(R.id.btn_historial)
         val btnSalir: Button = findViewById(R.id.btn_salir)
         bdAuth = Firebase.auth
         btnRegistro.setOnClickListener() {
             val intent = Intent(applicationContext, Registro::class.java)
+            startActivity(intent)
+        }
+        btnHistorial.setOnClickListener() {
+            val intent = Intent(applicationContext, Historial::class.java)
             startActivity(intent)
         }
         btnSalir.setOnClickListener() {

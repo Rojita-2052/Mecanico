@@ -1,5 +1,8 @@
 // Archivo de compilación de nivel superior donde puede agregar opciones de configuración comunes a todos los subproyectos/módulos.
 buildscript {
+    ext {
+        kotlin_version = '1.9.0-Beta'
+    }
     repositories {
         // Asegúrate de tener los siguientes dos repositorios
         google()  // Google's Maven repository
@@ -10,6 +13,7 @@ buildscript {
     dependencies {
         //Agregue la dependencia para el complemento Gradle de servicios de Google
         classpath 'com.google.gms:google-services:4.3.15'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
     }
 }
