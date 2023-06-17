@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.example.mecanico.databinding.ActivityRegistroBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,16 +18,14 @@ class Registro : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        iniciarSpinnerMarca()
-        iniciarSpinnerColor()
 
         binding.btnRegistarInspeccion.setOnClickListener(){
             val patente     =binding.txtPatente.text.toString()
-            val marca       =binding.spMarca.adapter.toString()
-            val colores     =binding.spColores.adapter.toString()
+            val marca       =binding.txtMarca.text.toString()
+            val colores     =binding.txtColor.text.toString()
             val date        =binding.txtDate.text.toString()
             val kilometraje =binding.txtKilometraje.text.toString()
-            val motivo      =binding.rgMotivo.checkedRadioButtonId.toString()
+            val motivo      =binding.txtMotivo.text.toString()
             val rut         =binding.txtRut.text.toString()
             val nombre      =binding.txtNombre.text.toString()
 
@@ -36,34 +33,19 @@ class Registro : AppCompatActivity() {
             val inspecion=Inspeccion(patente,marca,colores,date,kilometraje,motivo,rut,nombre)
             datebase.child(rut).setValue(inspecion).addOnSuccessListener {
                 binding.txtPatente.text.clear()
+                binding.txtMarca.text.clear()
+                binding.txtColor.text.clear()
                 binding.txtDate.text.clear()
                 binding.txtKilometraje.text.clear()
+                binding.txtMotivo.text.clear()
                 binding.txtRut.text.clear()
                 binding.txtNombre.text.clear()
 
                 val intent= Intent(applicationContext, Home::class.java)
                 startActivity(intent)
-
+                Toast.makeText(baseContext, "¡Inspección registrada!",Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    fun iniciarSpinnerMarca(){
-        val opcionMarca = arrayOf("Hyundai", "Chevrolet", "Susuki", "Nissan", "Chery")
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opcionMarca)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        val spinnerMarca = findViewById<Spinner>(R.id.sp_marca)
-        spinnerMarca.adapter = adapter
-    }
-    fun iniciarSpinnerColor() {
-        val opcionColor = arrayOf("Rojo", "Blanco", "Negro", "Verde", "Gris")
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opcionColor)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        val spinnerColor = findViewById<Spinner>(R.id.sp_colores)
-        spinnerColor.adapter = adapter
-    }
 }

@@ -24,6 +24,36 @@
 
 
     <EditText
+        android:id="@+id/txt_marca"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:hint="Marca"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_patente" />
+
+    <EditText
+        android:id="@+id/txt_color"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:hint="Color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_marca" />
+
+    <EditText
         android:id="@+id/txt_patente"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,30 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
-
-    <Spinner
-        android:id="@+id/sp_marca"
-        android:layout_width="330dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:minHeight="39dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_patente" />
-
-    <Spinner
-        android:id="@+id/sp_colores"
-        android:layout_width="330dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:minHeight="39dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_marca" />
 
 
     <EditText
@@ -74,7 +80,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_colores" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_color" />
 
     <EditText
         android:id="@+id/txt_kilometraje"
@@ -90,33 +96,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_date" />
 
-    <RadioGroup
-        android:id="@+id/rg_motivo"
-        android:layout_width="120dp"
-        android:layout_height="109dp"
+    <EditText
+        android:id="@+id/txt_motivo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="Motivo de la inspección"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_kilometraje">
-
-        <RadioButton
-            android:id="@+id/rb_servicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Servicio"
-            tools:layout_editor_absoluteX="75dp"
-            tools:layout_editor_absoluteY="587dp" />
-
-        <RadioButton
-            android:id="@+id/rb_mantencion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mantención"
-            tools:layout_editor_absoluteX="262dp"
-            tools:layout_editor_absoluteY="563dp" />
-
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/txt_kilometraje" />
 
     <EditText
         android:id="@+id/txt_rut"
@@ -130,7 +123,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_motivo" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_motivo" />
 
     <EditText
         android:id="@+id/txt_nombre"
