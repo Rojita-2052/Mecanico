@@ -1,38 +1,41 @@
 package com.example.mecanico
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.SearchView
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import android.widget.SearchView
 
 class Historial : AppCompatActivity() {
-    private lateinit var listViewInspecciones: ListView
+    private lateinit var recyclerViewInspecciones: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var database: DatabaseReference
     private lateinit var inspeccionesList: MutableList<Inspeccion>
-    private lateinit var adapter: ArrayAdapter<Inspeccion>
+    private lateinit var adapter: Adaptador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
 
-        listViewInspecciones = findViewById(R.id.listViewInspecciones)
-        searchView = findViewById(R.id.searchView)
+        recyclerViewInspecciones = findViewById(R.id.recyclerViewInspecciones)
+        this.searchView = findViewById(R.id.searchView)
         database = FirebaseDatabase.getInstance().getReference("Inspecciones")
         inspeccionesList = mutableListOf()
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, inspeccionesList)
-        listViewInspecciones.adapter = adapter
+        adapter = Adaptador(this, inspeccionesList)
+
+        recyclerViewInspecciones.layoutManager = LinearLayoutManager(this)
+        recyclerViewInspecciones.adapter = adapter
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                // Aquí puedes implementar la lógica para buscar en la lista
+                // Aquí puedes implementar la lógica para realizar la búsqueda al presionar el botón "Siguiente"
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                // Aquí puedes implementar la lógica para buscar en la lista a medida que se va escribiendo
+                // Aquí puedes implementar la lógica para buscar a medida que se va escribiendo
                 return false
             }
         })
@@ -50,12 +53,14 @@ class Historial : AppCompatActivity() {
                         inspeccionesList.add(inspeccion)
                     }
                 }
+                Log.d("TAG", "Cantidad de inspecciones: ${inspeccionesList.size}")
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Manejar el error en caso de que ocurra
+                Log.e("TAG", "Error al obtener inspecciones: ${error.message}")
             }
         })
     }
 }
+

@@ -2,7 +2,6 @@ package com.example.mecanico
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mecanico.databinding.ActivityRegistroBinding
@@ -19,7 +18,7 @@ class Registro : AppCompatActivity() {
         binding= ActivityRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnRegistarInspeccion.setOnClickListener(){
+        binding.btnRegistarInspeccion.setOnClickListener {
             val patente     =binding.txtPatente.text.toString()
             val marca       =binding.txtMarca.text.toString()
             val colores     =binding.txtColor.text.toString()
@@ -30,7 +29,16 @@ class Registro : AppCompatActivity() {
             val nombre      =binding.txtNombre.text.toString()
 
             datebase= FirebaseDatabase.getInstance().getReference("Inspecciones")
-            val inspecion=Inspeccion(patente,marca,colores,date,kilometraje,motivo,rut,nombre)
+            val inspecion=Inspeccion(
+                patente,
+                marca,
+                colores,
+                date,
+                kilometraje,
+                motivo,
+                rut,
+                nombre,
+            )
             datebase.child(rut).setValue(inspecion).addOnSuccessListener {
                 binding.txtPatente.text.clear()
                 binding.txtMarca.text.clear()
@@ -46,6 +54,19 @@ class Registro : AppCompatActivity() {
                 Toast.makeText(baseContext, "¡Inspección registrada!",Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun Inspeccion(
+        patente: String,
+        marca: String,
+        colores: String,
+        date: String,
+        kilometraje: String,
+        motivo: String,
+        rut: String,
+        nombre: String
+    ) {
+
     }
 
 }
