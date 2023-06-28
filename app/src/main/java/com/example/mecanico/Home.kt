@@ -18,15 +18,15 @@ class Home : AppCompatActivity() {
         val btnHistorial: Button = findViewById(R.id.btn_historial)
         val btnSalir: Button = findViewById(R.id.btn_salir)
         bdAuth = Firebase.auth
-        btnRegistro.setOnClickListener() {
+        btnRegistro.setOnClickListener {
             val intent = Intent(applicationContext, Registro::class.java)
             startActivity(intent)
         }
-        btnHistorial.setOnClickListener() {
+        btnHistorial.setOnClickListener {
             val intent = Intent(applicationContext, Historial::class.java)
             startActivity(intent)
         }
-        btnSalir.setOnClickListener() {
+        btnSalir.setOnClickListener {
             mostrarDialogoSalir()
         }
     }
