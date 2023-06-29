@@ -1,36 +1,48 @@
 package com.example.mecanico
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import android.widget.SearchView
+import android.widget.Toast
 
 class Historial : AppCompatActivity() {
-    private lateinit var recyclerViewInspecciones: RecyclerView
-    private lateinit var searchView: SearchView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var inspeccionsArrayList: ArrayList<ObtenerInspecciones>
     private lateinit var database: DatabaseReference
-    private lateinit var inspeccionesList: MutableList<Inspeccion>
-    private lateinit var adapter: Adaptador
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
 
-        recyclerViewInspecciones = findViewById(R.id.recyclerViewInspecciones)
-        this.searchView = findViewById(R.id.searchView)
-        database = FirebaseDatabase.getInstance().getReference("Inspecciones")
-        inspeccionesList = mutableListOf()
-        adapter = Adaptador(this, inspeccionesList)
+       recyclerView = findViewById(R.id.lista_inspecciones)
+       recyclerView.layoutManager = LinearLayoutManager(this)
 
-        recyclerViewInspecciones.layoutManager = LinearLayoutManager(this)
-        recyclerViewInspecciones.adapter = adapter
+       inspeccionsArrayList= arrayListOf()
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+       database = FirebaseDatabase.getInstance().getReference("Inspecciones")
+       database.addValueEventListener(object :ValueEventListener{
+           override fun onDataChange(snapshot: DataSnapshot) {
+               if(snapshot.exists()){
+                   for(dataSnapShot in snapshot.children){
+                       val inspecciones = dataSnapShot.getValue(ObtenerInspecciones::class.java)
+                       if(!inspeccionsArrayList.contains(inspecciones)){
+                           inspeccionsArrayList.add(inspecciones!!)
+                       }
+                   }
+                   recyclerView.adapter = MyAdapter(inspeccionsArrayList)
+               }
+           }
+           override fun onCancelled(error: DatabaseError) {
+               Toast.makeText(this@Historial,error.toString(),Toast.LENGTH_SHORT).show()
+           }
+       })
+        /*searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                // Aquí puedes implementar la lógica para realizar la búsqueda al presionar el botón "Siguiente"
+                searchView.clearFocus()
                 return false
             }
 
@@ -38,29 +50,8 @@ class Historial : AppCompatActivity() {
                 // Aquí puedes implementar la lógica para buscar a medida que se va escribiendo
                 return false
             }
-        })
+        })*/
 
-        mostrarInspecciones()
-    }
-
-    private fun mostrarInspecciones() {
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                inspeccionesList.clear()
-                for (dataSnapshot in snapshot.children) {
-                    val inspeccion = dataSnapshot.getValue(Inspeccion::class.java)
-                    if (inspeccion != null) {
-                        inspeccionesList.add(inspeccion)
-                    }
-                }
-                Log.d("TAG", "Cantidad de inspecciones: ${inspeccionesList.size}")
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("TAG", "Error al obtener inspecciones: ${error.message}")
-            }
-        })
     }
 }
 
