@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mecanico">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,16 +14,15 @@
 
         <activity
             android:name=".Registro"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".Historial"
-            android:label="Historial de Inspecciones">
-        </activity>
+            android:exported="false" />
 
         <activity
             android:name=".Home"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".Inicio"
