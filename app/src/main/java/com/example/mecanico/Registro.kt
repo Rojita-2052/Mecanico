@@ -2,7 +2,7 @@ package com.example.mecanico
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mecanico.databinding.ActivityRegistroBinding
 import com.google.firebase.database.DatabaseReference
@@ -29,7 +29,7 @@ class Registro : AppCompatActivity() {
             val nombre      =binding.txtNombre.text.toString()
 
             datebase= FirebaseDatabase.getInstance().getReference("Inspecciones")
-            val inspecion=Inspeccion(
+            val inspecion=ObtenerInspecciones(
                 patente,
                 marca,
                 colores,
@@ -56,17 +56,6 @@ class Registro : AppCompatActivity() {
         }
     }
 
-    private fun Inspeccion(
-        patente: String,
-        marca: String,
-        colores: String,
-        date: String,
-        kilometraje: String,
-        motivo: String,
-        rut: String,
-        nombre: String
-    ) {
 
-    }
 
 }
